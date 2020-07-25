@@ -6,3 +6,5 @@ node_modules
 
 # SECRETS
 .env
+
+missing_pieces.sql
