@@ -36,7 +36,7 @@ app.use((err, req, res, next) => {
 });
 
 // LAUNCH
-console.log(`Current NODE_ENV: ${process.env.NODE_ENV}`);
+// console.log(`Current NODE_ENV: ${process.env.NODE_ENV}`);
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
 });
