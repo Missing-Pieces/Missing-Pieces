@@ -24,6 +24,7 @@
       "default-param-last": ["error"],
       "func-style": ["off", "expression"],
       "no-constant-condition": "error",
+      "no-underscore-dangle": "off",
       "no-useless-call": "error",
       "prefer-exponentiation-operator": "error",
       "prefer-regex-literals": "error",
