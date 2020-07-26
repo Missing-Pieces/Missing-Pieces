@@ -1,18 +1,49 @@
 /* eslint-disable no-console */
 const path = require('path');
 const express = require('express');
+const cors = require('cors');
+const session = require('express-session');
+const PgStore = require('connect-pg-simple')(session);
+const passport = require('passport');
+const userRouter = require('./routes/userRouter');
 
+// Passport file contains our GITHUB_CLIENT_ID, COOKIE_SECRET, & cbURL
+require('./passport/passport');
 require('dotenv').config();
+
+// ms * sec * min * hours * days
+const SESSION_EXPIRY = 1000 * 60 * 60 * 24 * 7; // 1 week
 
 // CREATE APP
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// CREATES SESSION
+app.use(
+  session({
+    store: new PgStore({ conString: process.env.DATABASE }),
+    secret: process.env.COOKIE_SECRET,
+    resave: false,
+    cookie: { maxAge: SESSION_EXPIRY },
+  }),
+);
+
 // PARSE REQUEST
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// PASSPORT LAUNCH
+app.use(passport.initialize());
+app.use(passport.session());
+
+// CORS FOR AUTHENICATION AND CREDENTIALS
+app.use(cors());
+app.options('*', cors());
+
 /* ----- ENDPOINT ROUTES ----- */
+
+// USER AUTHENTICATION
+app.use('/api/user', userRouter);
 
 // STATIC ASSETS
 app.use('/', express.static(path.resolve(__dirname, '../dist')));
@@ -20,7 +51,7 @@ app.use('/', express.static(path.resolve(__dirname, '../dist')));
 /* ----- ERROR HANDLING ----- */
 
 // Catch-all route handler
-app.use((req, res) => res.sendStatus(404));
+app.use((req, res) => res.sendFile(path.join(__dirname, '../dist/index.html')));
 
 // Global error handler
 // eslint-disable-next-line no-unused-vars
