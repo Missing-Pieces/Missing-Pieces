@@ -1,43 +1,38 @@
-function CollectionPanel() {
-    return(
-        <div className="col-4">
-            <br></br>
-            <button className="btn btn-warning"> ADD GAME </button>
-            <br></br>
-            <br></br>
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/row';
 
+const CollectionPanel = ({ gameList }) => {
+  const gameCards = gameList.map((game) => (
+    <Card key={game.id}>
+      <Card.Img src={game.img} variant="top" />
+      <Card.Body>
+        <Card.Title>{game.title}</Card.Title>
+      </Card.Body>
+      <Button variant="success">
+        <Link to={`/parts/${game.id}`}>Search for Pieces</Link>
+      </Button>
+      <Button variant="secondary">
+        View Saved Pieces
+        {/* This should maybe be an accordian? */}
+      </Button>
+    </Card>
+  ));
 
-            {/* Game Cards ------ This repeated for each game the player adds*/} 
-            <div className="card">
-                <div className="card-title">GAME NAME</div>
-                <img src="#" alt="Card Image"></img>
-                <div className="card-body">
-                    <div className='row'>
-                        <div className='col'><button className="btn btn-primary">Search</button></div>
-                        <div className='col'><button className="btn btn-primary">View</button></div>
-                    </div>
-                </div>
-            </div>
-            <br></br>
-
-            {/*Same as above */}
-
-
-            <div className="card">
-                <div className="card-title">GAME NAME</div>
-                <img src="#" alt="Card Image"></img>
-                <div className="card-body">
-                    <div className='row'>
-                        <div className='col'><button className="btn btn-primary">Search</button></div>
-                        <div className='col'><button className="btn btn-primary">View</button></div>
-                    </div>
-                </div>
-            </div>
-            <br></br>
-
-
-        </div>
-    )
-}
+  return (
+    <Container>
+      <Row>
+        <h2>Collection</h2>
+        <Button variant="danger">
+          <Link to="/games">Search for games</Link>
+        </Button>
+      </Row>
+      <Row>{gameCards}</Row>
+    </Container>
+  );
+};
 
 export default CollectionPanel;

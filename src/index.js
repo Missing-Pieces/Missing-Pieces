@@ -1,13 +1,6 @@
-// WEBPACK ENTRY POINT
-// RENDER APP TO DOM
-
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import { render } from 'react-dom';
-import App from './components/App';
-// Importing React-Bootstrap
-import 'bootstrap/dist/css/bootstrap.min.css';
+import App from './App';
 
-render(
-    <App />,
-    document.getElementById('root')
-)
+render(<App />, document.getElementById('root'));

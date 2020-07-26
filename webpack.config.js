@@ -22,7 +22,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
-      }
+      },
     ],
   },
   devServer: {
@@ -34,7 +34,7 @@ module.exports = {
     },
     proxy: [
       {
-        context: [],
+        context: ['/*'],
         target: 'http://localhost:3000',
       },
     ],

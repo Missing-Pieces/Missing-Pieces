@@ -20,7 +20,7 @@ app.use('/', express.static(path.resolve(__dirname, '../dist')));
 /* ----- ERROR HANDLING ----- */
 
 // Catch-all route handler
-app.use((req, res) => res.sendStatus(404));
+app.use((req, res) => res.sendFile(path.join(__dirname, '../dist/index.html')));
 
 // Global error handler
 // eslint-disable-next-line no-unused-vars
