@@ -7,4 +7,8 @@ node_modules
 # SECRETS
 .env
 
+# WEBPACK
+dist/main.js
+
+#DATABASE
 missing_pieces.sql
