@@ -19,37 +19,35 @@ passport.use(
       //   { new: true, upsert: true, setDefaultsOnInsert: true },
       //   (err, user) => done(err, user),
       // );
-      console.log(profile)
-      let createUserQuery = {
+      console.log(profile);
+      const createUserQuery = {
         text: 'INSERT INTO public.users(username) VALUES($1) RETURNING *',
         values: [profile.username],
       };
       db.query(createUserQuery, (err, data) => {
-        console.log(data.rows)
-        return done(err, data.rows[0])
-      })
-    }
+        console.log(data.rows);
+        return done(err, data.rows[0]);
+      });
+    },
   ),
-)
+);
 // MATCH SESSION TO USER
 // User fields need to be updated for Postgres
 // !!!!!!!!!
 passport.serializeUser((user, done) => {
-  console.log('this is user 8888888888888888888888888888888', user)
-  done(null, user._id)
+  console.log('this is user 8888888888888888888888888888888', user);
+  done(null, user._id);
 });
 
 passport.deserializeUser((id, done) => {
-  console.log('this is id ===================', id)
+  console.log('this is id ===================', id);
   const findUserQuery = {
     text: 'SELECT * FROM users WHERE _id = $1',
     values: [id],
-  }
-  db.query(findUserQuery, (err, data) => {
-    return done(null, data.rows)
-  })
-})
-  // User.findById(id)
-  //   .then((user) => done(null, user))
-  //   .catch((err) => console.log(`Deserialize Error: ${err}`)),
+  };
+  db.query(findUserQuery, (err, data) => done(null, data.rows));
+});
+// User.findById(id)
+//   .then((user) => done(null, user))
+//   .catch((err) => console.log(`Deserialize Error: ${err}`)),
 // );

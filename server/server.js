@@ -5,8 +5,9 @@ const cors = require('cors');
 const session = require('express-session');
 const PgStore = require('connect-pg-simple')(session);
 const GitHubStrategy = require('passport-github2').Strategy;
-const userRouter = require('./routes/userRouter')
-const passport = require('passport')
+const passport = require('passport');
+const userRouter = require('./routes/userRouter');
+const gameRouter = require('./routes/gameRouter');
 
 require('dotenv').config();
 // ms, sec, min, hours, days, how long session will expire
@@ -43,6 +44,8 @@ app.options('*', cors());
 
 /* ----- ENDPOINT ROUTES ----- */
 app.use('/api/user', userRouter);
+
+app.use('/api/game', gameRouter);
 
 // STATIC ASSETS
 app.use('/', express.static(path.resolve(__dirname, '../dist')));
