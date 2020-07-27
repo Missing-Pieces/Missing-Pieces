@@ -1,57 +1,88 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/card';
 import Button from 'react-bootstrap/button';
-import Dropdown from 'react-bootstrap/Dropdown';
 import Collapse from 'react-bootstrap/collapse';
-import Row from 'react-bootstrap/row';
-import Col from 'react-bootstrap/col';
 import Container from 'react-bootstrap/container';
-import { Link } from 'react-router-dom';
+import GamePiece from './GamePiece';
 
 const GameCard = ({ game }) => {
   const [open, setOpen] = useState(false);
+  const [desc, setDesc] = useState('');
+  const [type, setType] = useState('want');
+
+  const handlePieceAdd = (e) => {
+    e.preventDefault();
+
+    fetch(`/collection/pieces/${game.id}`, {
+      method: 'POST',
+      body: JSON.stringify({ type, desc }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const msg = data.success ? 'Piece added!' : 'Error adding piece';
+        alert(msg);
+      })
+      .catch((err) => err);
+  };
+
+  const handleChange = (e) => {
+    setDesc(e.target.value);
+  };
+
+  const handleRadio = (e) => {
+    setType(e.target.value);
+  };
+
+  let { pieces } = game;
+  if (Array.isArray(pieces)) {
+    pieces = pieces.map((piece) => <GamePiece key={`${piece.type}-${piece.desc}`} piece={piece} />);
+  }
 
   return (
     <Card key={game.id}>
       <Card.Img src={game.img} variant="top" />
+
       <Card.Body>
         <Card.Title>{game.title}</Card.Title>
       </Card.Body>
-      <Button variant="success">
-        <Link to={`/parts/${game.id}`}>Search for Pieces</Link>
-      </Button>
+
+      <Link to={`/parts/${game.id}`}>
+        <Button variant="secondary">Search for Pieces</Button>
+      </Link>
+
       <Button
         aira-expanded={String(open)}
         aria-controls={`savedPiecesDropDown-${game.id}`}
-        variant="secondary"
+        variant="info"
         onClick={() => setOpen(!open)}
       >
         View Saved Pieces
-        {/* This should maybe be an accordian? */}
       </Button>
+
       <Collapse in={open}>
         <div id={`savedPiecesDropDown-${game.id}`}>
           <Container className="pieceCreator">
-            <Row>
-              <Col>
-                <Dropdown>
-                  <Dropdown.Toggle id="haveOrWantDropdown" variant="secondary">
-                    Relation
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item href="#">Have</Dropdown.Item>
-                    <Dropdown.Item href="#">Want</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-              </Col>
-              <Col>
-                <textarea />
-              </Col>
-              <Col>
-                <Button variant="secondary">SAVE PIECE</Button>
-              </Col>
-            </Row>
+            <form onSubmit={handlePieceAdd}>
+              <input
+                required
+                placeholder="Enter a game title to search"
+                type="text"
+                value={desc}
+                onChange={handleChange}
+              />
+              <label>
+                <input checked={type === 'want'} type="radio" value="want" onChange={handleRadio} />
+                Want
+              </label>
+              <label>
+                <input checked={type === 'have'} type="radio" value="have" onChange={handleRadio} />
+                Have
+              </label>
+              <input type="submit" value="Add Piece" />
+            </form>
           </Container>
+          {pieces}
         </div>
       </Collapse>
     </Card>

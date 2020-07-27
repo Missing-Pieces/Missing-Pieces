@@ -14,3 +14,16 @@
     border-style: solid;
     border-color: black;
 }
+
+.have {
+  padding: 10px 15px;
+  border-radius: 2px;
+  background-color: palegreen;
+
+}
+
+.want {
+  padding: 10px 15px;
+  border-radius: 2px;
+  background-color: lemonchiffon;
+}
