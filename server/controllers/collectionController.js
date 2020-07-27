@@ -2,6 +2,19 @@ const db = require('../models/model');
 
 const collectionController = {};
 
+collectionController.getCollection = (req, res, next) => {
+  const queryGetCollection = {
+    text: 'SELECT collection._id FROM collection WHERE game_id = $1 AND users_id = $2',
+    values: [req.params.game_id, req.session.passport.user],
+  };
+  db.query(queryGetCollection)
+    .then((data) => {
+      res.locals.collection = data.rows[0];
+      return next();
+    })
+    .catch((err) => next(err));
+};
+
 collectionController.addCollection = (req, res, next) => {
   const queryAddCollection = {
     text: 'INSERT INTO public.collection(game_id, users_id) VALUES($1, $2) RETURNING *',
@@ -13,6 +26,21 @@ collectionController.addCollection = (req, res, next) => {
       res.locals.collection = data.rows[0];
       return next();
     })
+    .catch((err) => next(err));
+};
+
+collectionController.addPieces = (req, res, next) => {
+  const queryAddPieces = {
+    text:
+      'INSERT INTO public.missing_pieces(collection_id, type, missing_piece) VALUES($1, $2, $3) RETURNING *',
+    values: [res.locals.collection._id, 'have', 'some description'],
+  };
+  db.query(queryAddPieces)
+    .then((data) =>
+      // console.log('Game successfully added to collection');
+      // res.locals.collection = data.rows[0];
+      next(),
+    )
     .catch((err) => next(err));
 };
 
