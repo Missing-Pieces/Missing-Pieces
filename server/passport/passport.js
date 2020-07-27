@@ -27,7 +27,6 @@ passport.use(
             done(innerErr, innerResults.rows[0]),
           );
         }
-        console.log('outer results', outerResults.rows[0]);
         return done(outerErr, outerResults.rows[0]);
       });
       // db.query(createUserQuery, (err, data) => done(err, data.rows[0]));
