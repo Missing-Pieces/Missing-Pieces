@@ -25,7 +25,7 @@ gameController.getGameInfo = (req, res, next) => {
 
 gameController.fetchGameById = (req, res, next) => {
   fetch(
-    `https://www.boardgameatlas.com/api/search?ids=${res.locals.collection.game_id}&pretty=true&client_id=JLBr5npPhV`,
+    `https://www.boardgameatlas.com/api/search?ids=${req.params.game_id}&pretty=true&client_id=JLBr5npPhV`,
   )
     .then((data) => data.json())
     .then((body) => {
@@ -50,7 +50,6 @@ gameController.addGame = (req, res, next) => {
     values: [name, id, year_published, img, description, primary_publisher],
   };
   db.query(addGameQuery, (err, results) => {
-    console.log(results);
     if (err) return next(err);
     console.log('Game has successfully been added');
     return next();

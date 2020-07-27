@@ -6,11 +6,11 @@ const gameController = require('../controllers/gameController');
 
 router.post(
   '/:game_id',
-  collectionController.addCollection,
   gameController.fetchGameById,
   gameController.addGame,
+  collectionController.addCollection,
   (req, res) => {
-    res.status(200).json(res.locals.game);
+    res.status(200).json(res.locals.collection);
   },
 );
 
