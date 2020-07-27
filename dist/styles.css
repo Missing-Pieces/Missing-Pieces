@@ -1,0 +1,16 @@
+#titlePanel {
+    border-style: solid;
+    border-color: black;
+    margin: 10px;
+}
+
+#collectionPanel {
+    border-style: solid;
+    border-color: black;
+    margin: 10px;
+}
+
+.pieceCreator {
+    border-style: solid;
+    border-color: black;
+}

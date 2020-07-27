@@ -10,6 +10,12 @@ const Home = () => (
         title: 'Catan',
         id: 'OIXt3DmJU0',
       },
+      {
+        img:
+          'https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559258096678-51Eiofu9mqL.jpg',
+        title: 'Catan',
+        id: 'OIXt3DmJU2',
+      },
     ]}
   />
 );
