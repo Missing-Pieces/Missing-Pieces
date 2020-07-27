@@ -16,4 +16,19 @@ collectionController.addCollection = (req, res, next) => {
     .catch((err) => next(err));
 };
 
+collectionController.addPieces = (req, res, next) => {
+  const queryAddPieces = {
+    text:
+      'INSERT INTO public.missing_pieces(game_id, users_id, type) VALUES($1, $2, $3) RETURNING *',
+    values: [req.params.game_id, req.session.passport.user],
+  };
+  db.query(queryAddPieces)
+    .then((data) =>
+      // console.log('Game successfully added to collection');
+      // res.locals.collection = data.rows[0];
+      next(),
+    )
+    .catch((err) => next(err));
+};
+
 module.exports = collectionController;
