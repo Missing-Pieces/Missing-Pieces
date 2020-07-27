@@ -9,11 +9,12 @@ const passport = require('passport');
 const userRouter = require('./routes/userRouter');
 const gameRouter = require('./routes/gameRouter');
 
-require('dotenv').config();
-// ms, sec, min, hours, days, how long session will expire
-const SESSION_EXPIRY = 1000 * 60 * 60 * 24 * 7; // 1 week
-// requiring in passport, in the file contains our client id, secret, cbURL
+// Passport file contains our GITHUB_CLIENT_ID, COOKIE_SECRET, & cbURL
 require('./passport/passport');
+require('dotenv').config();
+
+// ms * sec * min * hours * days
+const SESSION_EXPIRY = 1000 * 60 * 60 * 24 * 7; // 1 week
 
 // CREATE APP
 const app = express();
@@ -40,9 +41,10 @@ app.use(passport.session());
 // CORS FOR AUTHENICATION AND CREDENTIALS
 app.use(cors());
 app.options('*', cors());
-// PARSE REQUEST
 
 /* ----- ENDPOINT ROUTES ----- */
+
+// USER AUTHENTICATION
 app.use('/api/user', userRouter);
 
 app.use('/api/games', gameRouter);
@@ -53,7 +55,7 @@ app.use('/', express.static(path.resolve(__dirname, '../dist')));
 /* ----- ERROR HANDLING ----- */
 
 // Catch-all route handler
-app.use((req, res) => res.sendStatus(404));
+app.use((req, res) => res.sendFile(path.join(__dirname, '../dist/index.html')));
 
 // Global error handler
 // eslint-disable-next-line no-unused-vars
