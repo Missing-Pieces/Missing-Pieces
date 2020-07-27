@@ -37,7 +37,7 @@
           }
       ],
       "react/function-component-definition": [
-          "off",
+          "error",
           {
               "namedComponents": "arrow-function",
               "unnamedComponents": "arrow-function"

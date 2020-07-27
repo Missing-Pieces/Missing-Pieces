@@ -19,6 +19,10 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
   devServer: {
@@ -30,10 +34,9 @@ module.exports = {
     },
     proxy: [
       {
-        '/**': {
-          target: 'http://localhost:3000/',
-          secure: false,
-        },
+        context: ['**'],
+        target: 'http://localhost:3000/',
+        secure: false,
       },
     ],
   },
