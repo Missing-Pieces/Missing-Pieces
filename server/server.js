@@ -24,6 +24,7 @@ app.use(
     store: new PgStore({ conString: process.env.DATABASE }),
     secret: process.env.COOKIE_SECRET,
     resave: false,
+    saveUninitialized: true,
     cookie: { maxAge: SESSION_EXPIRY },
   }),
 );

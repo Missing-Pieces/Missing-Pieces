@@ -1,41 +1,54 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import Jumbotron from 'react-bootstrap/Jumbotron';
+import Spinner from 'react-bootstrap/Spinner';
+import Table from 'react-bootstrap/Table';
 
-// TODO: Refactor to Bootsrap Components
-const PartSearch = ({ match }) => (
-  <div className="col-8">
-    {/* Might not want this as a jumbotron. Maybe more like a div */}
-    <div className="jumbotron jumbotron-fluid">
-      <div className="row">
-        <div className="col-4">
-          <img alt="Box Art" src="#" />
-        </div>
-        <div className="col-8">
-          <h3>GAME TITLE</h3>
-          <h6>Game Description and Other Info</h6>
-        </div>
-      </div>
-    </div>
-    <h1>{match.params.id}</h1>
-    {/* Search Results in the form of a table */}
-    <table className="table">
-      <thead>
-        <tr>
-          <th>User Information</th>
-          <th>Pieces</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>DATA For User</td>
-          <td>COLLECTION OF PIECES WILLING TO GIVE</td>
-        </tr>
-        <tr>
-          <td>DATA For User</td>
-          <td>COLLECTION OF PIECES WILLING TO GIVE</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-);
+const PartSearch = ({ match }) => {
+  const [game, setGame] = useState(null);
+  const [pieces, setPieces] = useState([]);
+
+  useEffect(() => {
+    fetch(`/api/pieces/${match.params.id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        const { userPieces, gameDetails } = data;
+        if (Array.isArray(userPieces)) setPieces(userPieces);
+        if (typeof gameDetails === 'object') setGame(gameDetails);
+      })
+      .catch((err) => console.log(err));
+  });
+
+  return game === null ? (
+    <>
+      <Spinner animation="border" role="status" variant="info">
+        <span className="sr-only">Loading...</span>
+      </Spinner>
+    </>
+  ) : (
+    <>
+      <Jumbotron fluid>
+        <img alt="Box Art" src={game.img} style={{ display: 'inline-block' }} />
+        <h2>{game.title.toUpperCase()}</h2>
+        <p>{game.desc}</p>
+      </Jumbotron>
+      <Table bordered striped>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Pieces</th>
+          </tr>
+        </thead>
+        <tbody>
+          {pieces.map((user) => (
+            <tr key={user.username}>
+              <td>{user.username}</td>
+              <td>{user.pieces.reduce((acc, curr) => `${acc}\n${curr}`)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </>
+  );
+};
 
 export default PartSearch;
