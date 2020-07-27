@@ -9,6 +9,7 @@ const passport = require('passport');
 const userRouter = require('./routes/userRouter');
 const gameRouter = require('./routes/gameRouter');
 const collectionRouter = require('./routes/collectionRouter');
+const piecesRouter = require('./routes/piecesRouter.js');
 
 // Passport file contains our GITHUB_CLIENT_ID, COOKIE_SECRET, & cbURL
 require('./passport/passport');
@@ -52,6 +53,8 @@ app.use('/api/user', userRouter);
 app.use('/api/games', gameRouter);
 
 app.use('/api/collection', collectionRouter);
+
+app.use('/api/pieces', piecesRouter);
 
 // STATIC ASSETS
 app.use('/', express.static(path.resolve(__dirname, '../dist')));
