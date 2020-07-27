@@ -10,7 +10,7 @@ router.post(
   gameController.addGame,
   collectionController.addCollection,
   (req, res) => {
-    res.status(200).json(res.locals.collection);
+    res.status(200).json({ success: true });
   },
 );
 
