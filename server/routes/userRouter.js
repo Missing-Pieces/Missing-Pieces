@@ -11,10 +11,6 @@ router.get(
     successRedirect: '/',
     failureRedirect: '/login/failed',
   }),
-  // Below middleware should never be reached
-  // (req, res) => {
-  //   res.status(200).json({ success: '4' });
-  // },
 );
 
 router.get('/login/failed', (req, res) =>
