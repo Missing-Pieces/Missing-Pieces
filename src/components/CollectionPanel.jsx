@@ -1,6 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/row';
 import Col from 'react-bootstrap/col';
@@ -14,9 +12,6 @@ const CollectionPanel = ({ gameList }) => {
       <Row>
         <Col md={{ span: 2, offset: 5 }}>
           <h2>Collection</h2>
-          <Button variant="danger">
-            <Link to="/games">Search for games</Link>
-          </Button>
         </Col>
       </Row>
       <Row>
