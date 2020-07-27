@@ -1,7 +1,7 @@
 # Server API Documentation
-## React Router base URL: http://localhost:3000
-## API base URL: http://localhost:3000/api
-#### User details are expected to be captured via OAuth / session cookie
+### React Router base URL: http://localhost:3000
+### API base URL: http://localhost:3000/api
+**User details are expected to be captured via OAuth / session cookie**
 Note: _BGA_ stands for the [Board Game Atlas API](https://www.boardgameatlas.com/api/docs)
 
 ---
@@ -11,12 +11,12 @@ Note: _BGA_ stands for the [Board Game Atlas API](https://www.boardgameatlas.com
 `/login`
 
 ### _Login Button:_
-_GET `/user/login`_
+_**GET** `/user/login`_
 
 **Expected Action:** Start OAuth process
 
 ### _Logout Button:_
-_GET `/user/logout`_
+_**GET** `/user/logout`_
 
 **Expected Action:** Disassociate session
 
@@ -27,7 +27,7 @@ _GET `/user/logout`_
 `/`
 
 ### _useEffect:_
-_GET /collection_
+_**GET** `/collection`_
 
 **Expected Response:**
   - Array of game objects in user's collection
@@ -55,7 +55,7 @@ _GET /collection_
 ```
 
 ### _handlePieceAdd:_
-_POST /collection/pieces/{gameid}_
+_**POST** `/collection/pieces/{gameid}`_
   - {gameid} is BGA game.id of game corresponding to piece
   - gameid should be captured from button id or containing Game card
 
@@ -88,12 +88,12 @@ Add piece to user's collection with associated game
 `/games`
 
 ### _handleSearch:_
-_GET /games?query={search%20string}_
-  - "search string" is name of game to search for via BGA
+_**GET** `/games?query={search%20string}`_
+  - "search string" is name of game to search for via BGA, captured from user input
   - spaces in search string will be encoded as `%20`
 
 **Expected Response:**
-  - Server will need to fetch & transform data from BGA
+  - Server will need to fetch & transform search data from BGA
 ```jsonc
 [
   {
@@ -111,7 +111,7 @@ _GET /games?query={search%20string}_
 ```
 
 ### _handleGameAdd:_
-_POST /collection/{gameid}_
+_**POST** `/collection/{gameid}`_
   - {gameid} is BGA game.id, as captured from search
 
 **Expected Action:**
@@ -128,12 +128,12 @@ Add game to user's collection in DB
 
 ## Part Search Page
 ### React-Router:
-`/parts/{gameid}`
+`/parts/{_gameid_}`
   - Part Search can only be reached by clicking through from a particular game
   - {_gameid_} will be captured on clickthrough via route param (props.match.params)
 
 ### _useEffect:_
-_GET /pieces/{gameid}_
+_**GET** `/pieces/{gameid}`_
 
 **Expected Response:**
   - Response should contain all pieces that users **have** to trade for a particular **gameid**, grouped by user
