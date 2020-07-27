@@ -1,7 +1,7 @@
 # Server API Documentation
 ### React Router base URL: http://localhost:3000
 ### API base URL: http://localhost:3000/api
-**User details are expected to be captured via OAuth / session cookie**
+**User details are expected to be captured via OAuth / session cookie**   
 Note: _BGA_ stands for the [Board Game Atlas API](https://www.boardgameatlas.com/api/docs)
 
 ---
@@ -10,10 +10,12 @@ Note: _BGA_ stands for the [Board Game Atlas API](https://www.boardgameatlas.com
 ### React-Router:
 `/login`
 
+
 ### _Login Button:_
 _**GET** `/user/login`_
 
 **Expected Action:** Start OAuth process
+
 
 ### _Logout Button:_
 _**GET** `/user/logout`_
@@ -25,6 +27,7 @@ _**GET** `/user/logout`_
 ## Home Page
 ### React-Router:
 `/`
+
 
 ### _useEffect:_
 _**GET** `/collection`_
@@ -54,6 +57,7 @@ _**GET** `/collection`_
 ]
 ```
 
+
 ### _handlePieceAdd:_
 _**POST** `/collection/pieces/{gameid}`_
   - {gameid} is BGA game.id of game corresponding to piece
@@ -77,6 +81,7 @@ Add piece to user's collection with associated game
 }
 ```
 
+
 ### TODO:
   1. Delete piece from game in user's collection
   1. Delete game from user's collection
@@ -86,6 +91,7 @@ Add piece to user's collection with associated game
 ## Game Search Page
 ### React-Router:
 `/games`
+
 
 ### _handleSearch:_
 _**GET** `/games?query={search%20string}`_
@@ -110,6 +116,7 @@ _**GET** `/games?query={search%20string}`_
 ]
 ```
 
+
 ### _handleGameAdd:_
 _**POST** `/collection/{gameid}`_
   - {gameid} is BGA game.id, as captured from search
@@ -131,6 +138,7 @@ Add game to user's collection in DB
 `/parts/{_gameid_}`
   - Part Search can only be reached by clicking through from a particular game
   - {_gameid_} will be captured on clickthrough via route param (props.match.params)
+
 
 ### _useEffect:_
 _**GET** `/pieces/{gameid}`_
