@@ -11,4 +11,3 @@ node_modules
 dist/main.js
 
 #DATABASE
-missing_pieces.sql

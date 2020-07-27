@@ -22,12 +22,14 @@ const Home = () => {
 
   const [gameList, setGameList] = useState([]);
 
+  const [count, setCount] = useState(0);
+
   useEffect(() => {
-    fetch('/collection')
+    fetch('/api/collection')
       .then((response) => response.json())
       .then((data) => (Array.isArray(data) > 0 ? setGameList(data) : null))
       .catch((err) => console.log(err));
-  });
+  }, [count]);
 
   return (
     <>
