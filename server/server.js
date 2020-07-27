@@ -45,7 +45,7 @@ app.options('*', cors());
 /* ----- ENDPOINT ROUTES ----- */
 app.use('/api/user', userRouter);
 
-app.use('/api/game', gameRouter);
+app.use('/api/games', gameRouter);
 
 // STATIC ASSETS
 app.use('/', express.static(path.resolve(__dirname, '../dist')));
