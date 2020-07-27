@@ -14,9 +14,9 @@ gameController.getGameInfo = (req, res, next) => {
           name,
           id,
           year_published,
-          images: images.original,
+          img: images.original,
           description,
-          publisher: primary_publisher,
+          primary_publisher,
         }),
       );
       return next();
