@@ -4,8 +4,10 @@ const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
 const PgStore = require('connect-pg-simple')(session);
+const GitHubStrategy = require('passport-github2').Strategy;
 const passport = require('passport');
 const userRouter = require('./routes/userRouter');
+const gameRouter = require('./routes/gameRouter');
 
 // Passport file contains our GITHUB_CLIENT_ID, COOKIE_SECRET, & cbURL
 require('./passport/passport');
@@ -45,6 +47,8 @@ app.options('*', cors());
 
 // USER AUTHENTICATION
 app.use('/api/user', userRouter);
+
+app.use('/api/games', gameRouter);
 
 // STATIC ASSETS
 app.use('/', express.static(path.resolve(__dirname, '../dist')));
