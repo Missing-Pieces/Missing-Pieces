@@ -18,7 +18,6 @@
     border-color: black;
 }
 
-<<<<<<< Updated upstream
 .have {
   padding: 10px 15px;
   border-radius: 2px;
@@ -29,10 +28,9 @@
 .want {
   padding: 10px 15px;
   border-radius: 2px;
-  background-color: lemonchiffon;
+  background-color: tomato;
 }
-=======
->>>>>>> Stashed changes
+
 img {
     height: auto;
     width: auto;
