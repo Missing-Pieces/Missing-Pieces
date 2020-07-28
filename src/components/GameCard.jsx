@@ -16,6 +16,9 @@ const GameCard = ({ game }) => {
 
     fetch(`api/collection/pieces/${game.id}`, {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({ type, desc }),
     })
       .then((response) => response.json())
