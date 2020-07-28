@@ -44,5 +44,5 @@ passport.deserializeUser((id, done) => {
     text: 'SELECT * FROM users WHERE _id = $1',
     values: [id],
   };
-  db.query(findUserQuery, (err, data) => done(null, data.rows));
+  db.query(findUserQuery, (err, data) => done(null, data && data.rows));
 });

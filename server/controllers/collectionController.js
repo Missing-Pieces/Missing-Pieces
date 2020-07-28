@@ -5,7 +5,7 @@ const collectionController = {};
 collectionController.loadCollection = (req, res, next) => {
   const queryLoadCollection = {
     text:
-      'SELECT g.name, g._id, g.images, m.missing_piece, m.type FROM missing_pieces as m FULL JOIN collection as c ON c._id = m.collection_id FULL JOIN game as g ON g._id = c.game_id FULL JOIN users as u ON c.users_id = u._id WHERE u._id = $1',
+      'SELECT g.name, g._id, g.images, m.missing_piece, m.type FROM missing_pieces as m FULL JOIN collection as c ON c._id = m.collection_id FULL JOIN game as g ON g._id = c.game_id FULL JOIN users as u ON c.users_id = u._id WHERE u._id = $1 ORDER BY g._id',
     values: [req.session.passport.user],
   };
   db.query(queryLoadCollection).then((data) => {
