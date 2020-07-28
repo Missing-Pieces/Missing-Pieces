@@ -11,7 +11,7 @@ collectionController.loadCollection = (req, res, next) => {
   db.query(queryLoadCollection).then((data) => {
     const { rows } = data;
     const output = [];
-    const len = rows.length - 1;
+    const len = rows.length;
     for (let i = 0; i < len; i += 1) {
       const { name, _id, images, missing_piece } = rows[i];
       const game = { id: _id, name, img: images, pieces: [] };
@@ -62,7 +62,7 @@ collectionController.addPieces = (req, res, next) => {
   const queryAddPieces = {
     text:
       'INSERT INTO public.missing_pieces(collection_id, type, missing_piece) VALUES($1, $2, $3) RETURNING *',
-    values: [res.locals.collection._id, 'have', 'some description'],
+    values: [res.locals.collection._id, req.body.type, req.body.desc],
   };
   db.query(queryAddPieces)
     .then((data) =>

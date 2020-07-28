@@ -14,13 +14,14 @@ const GameCard = ({ game }) => {
   const handlePieceAdd = (e) => {
     e.preventDefault();
 
-    fetch(`/collection/pieces/${game.id}`, {
+    fetch(`api/collection/pieces/${game.id}`, {
       method: 'POST',
       body: JSON.stringify({ type, desc }),
     })
       .then((response) => response.json())
       .then((data) => {
         const msg = data.success ? 'Piece added!' : 'Error adding piece';
+        setDesc('');
         alert(msg);
       })
       .catch((err) => err);
