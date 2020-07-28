@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import ListGroupItem from 'react-bootstrap/ListGroupItem';
 
-const handleAdd = (e) => {
+const handleGameAdd = (e) => {
   fetch(`/api/collection/${e.target.id}`, { method: 'POST' })
     .then((response) => response.json())
     .then((data) => {
@@ -25,7 +25,7 @@ const Results = ({ results }) => (
           <ListGroupItem>Year: {game.year_published}</ListGroupItem>
           <ListGroupItem>Publisher: {game.primary_publisher}</ListGroupItem>
         </ListGroup>
-        <Button id={game.id} variant="info" onClick={handleAdd}>
+        <Button id={game.id} variant="success" onClick={handleGameAdd}>
           Add to Collection
         </Button>
       </Card>

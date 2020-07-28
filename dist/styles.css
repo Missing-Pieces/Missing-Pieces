@@ -8,13 +8,17 @@
     border-style: solid;
     border-color: black;
     margin: 10px;
+    background-color: #8d959b;
 }
+
+
 
 .pieceCreator {
     border-style: solid;
     border-color: black;
 }
 
+<<<<<<< Updated upstream
 .have {
   padding: 10px 15px;
   border-radius: 2px;
@@ -26,4 +30,64 @@
   padding: 10px 15px;
   border-radius: 2px;
   background-color: lemonchiffon;
+}
+=======
+>>>>>>> Stashed changes
+img {
+    height: auto;
+    width: auto;
+    max-height: 300px;
+    max-width: 300px;
+    min-height: 300px;
+    min-width: 300px;
+}
+
+/* Title Panel */
+#logo {
+    min-height: 0;
+    min-width: 0;
+}
+.linkInBtns {
+    color: white;
+}
+.btnChessColor {
+    background-color: #f4eee4;
+}
+.btnChessColor .linkInBtns {
+    color: grey;
+}
+
+
+
+/* Login Page */
+#loginContainer {
+    border-style: solid;
+    border-color: black;
+    background-color: #8d959b;
+}
+
+#OauthBtn {
+    background-color: #f4eee4;
+    color: grey
+}
+
+.loginCard {
+    background-color: #8d959b;
+    text-align: center;
+}
+
+
+
+/* Game Search Panel */
+
+#GameSearchPanel {
+    border-style: solid;
+    border-color: black;
+    background-color: #8d959b;
+    font-size: large;
+    text-align: center;
+}
+
+.card-title {
+    max-width: 300px;
 }

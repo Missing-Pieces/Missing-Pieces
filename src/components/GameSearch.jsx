@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
 import SearchBar from './SearchBar';
 import Results from './Results';
 
@@ -21,17 +23,21 @@ const GameSearch = () => {
   };
 
   return (
-    <>
+    <Container id="GameSearchPanel">
       <Row>
-        <SearchBar
-          label="Search for new games to add to your collection: "
-          query={query}
-          onChange={handleChange}
-          onSearch={handleSearch}
-        />
+        <Col>
+          <SearchBar
+            label="Search for new games to add to your collection: "
+            query={query}
+            onChange={handleChange}
+            onSearch={handleSearch}
+          />
+        </Col>
       </Row>
-      <Row>{results.length > 0 && <Results results={results} />}</Row>
-    </>
+      <Row>
+        <Col md={{ span: 4, offset: 4 }}>{results.length > 0 && <Results results={results} />}</Col>
+      </Row>
+    </Container>
   );
 };
 
