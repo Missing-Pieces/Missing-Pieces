@@ -66,7 +66,7 @@ const GameCard = ({ game }) => {
             <form onSubmit={handlePieceAdd}>
               <input
                 required
-                placeholder="Enter a game title to search"
+                placeholder="Enter your piece description"
                 type="text"
                 value={desc}
                 onChange={handleChange}
