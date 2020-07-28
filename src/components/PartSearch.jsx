@@ -6,6 +6,8 @@ import Table from 'react-bootstrap/Table';
 const PartSearch = ({ match }) => {
   const [game, setGame] = useState(null);
   const [pieces, setPieces] = useState([]);
+  const [load, setLoad] = useState(false);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     fetch(`/api/pieces/${match.params.id}`)
@@ -14,22 +16,27 @@ const PartSearch = ({ match }) => {
         const { userPieces, gameDetails } = data;
         if (Array.isArray(userPieces)) setPieces(userPieces);
         if (typeof gameDetails === 'object') setGame(gameDetails);
+        else setLoad(true);
       })
       .catch((err) => console.log(err));
-  });
+  }, [count]);
 
   return game === null ? (
     <>
-      <Spinner animation="border" role="status" variant="info">
-        <span className="sr-only">Loading...</span>
-      </Spinner>
+      {!load ? (
+        <Spinner animation="border" role="status" variant="info">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+      ) : (
+        <h2>No pieces found...</h2>
+      )}
     </>
   ) : (
     <>
       <Jumbotron fluid>
         <img alt="Box Art" src={game.img} style={{ display: 'inline-block' }} />
         <h2>{game.title.toUpperCase()}</h2>
-        <p>{game.desc}</p>
+        {game.desc}
       </Jumbotron>
       <Table bordered striped>
         <thead>
