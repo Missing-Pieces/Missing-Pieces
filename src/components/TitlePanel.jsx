@@ -16,19 +16,25 @@ const TitlePanel = ({ username }) => (
           alt="Missing Pieces logo"
           className="d-inline-block rounded"
           height="200"
+          id="logo"
           src="../assets/chess.png"
           width="500"
         />
       </Col>
-      <Col xs={4}>
-        <Button variant="danger">
-          <Link to="/login">Login</Link>
+      <Col xs={2}>
+        <br />
+        <Button className="btnChessColor">
+          <Link className="linkInBtns" to="/login">
+            Login/Logout
+          </Link>
         </Button>
-        <Button variant="info">
-          <Link to="/">Logout [fake]</Link>
-        </Button>
-        <Button variant="warning">
-          <Link to="/">Home</Link>
+      </Col>
+      <Col xs={2}>
+        <br />
+        <Button variant="secondary">
+          <Link className="linkInBtns" to="/">
+            Home
+          </Link>
         </Button>
       </Col>
     </Row>

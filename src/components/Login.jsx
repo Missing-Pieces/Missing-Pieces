@@ -11,14 +11,14 @@ const handleLogout = () =>
     .catch((err) => console.log(err));
 
 const Landing = () => (
-  <Container>
-    <Card>
+  <Container id="loginContainer">
+    <Card className="loginCard">
       <Card.Body>
         <Card.Title>Welcome to Missing Pieces</Card.Title>
-        <Button variant="primary" onClick={handleLogin}>
+        <Button id="OauthBtn" onClick={handleLogin}>
           Login via Github
         </Button>
-        <Button variant="danger" onClick={handleLogout}>
+        <Button variant="secondary" onClick={handleLogout}>
           Logout
         </Button>
         <Card.Text>Please login to view game pieces available for trade.</Card.Text>
