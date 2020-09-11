@@ -47,7 +47,6 @@
   },
   "dependencies": {
     "bootstrap": "^4.5.0",
-    "connect-pg-simple": "^6.1.0",
     "connect-redis": "^5.0.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
