@@ -3,8 +3,9 @@ const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
-const PgStore = require('connect-pg-simple')(session);
+const RedisStore = require('connect-redis')(session);
 const passport = require('passport');
+const redis = require('redis');
 const userRouter = require('./routes/userRouter');
 const gameRouter = require('./routes/gameRouter');
 const collectionRouter = require('./routes/collectionRouter');
@@ -13,6 +14,12 @@ const piecesRouter = require('./routes/piecesRouter.js');
 // Passport file contains our GITHUB_CLIENT_ID, COOKIE_SECRET, & cbURL
 require('./passport/passport');
 require('dotenv').config();
+
+// Implemented Redis client
+const redisClient = redis.createClient(process.env.REDIS_URL, {
+  port: process.env.REDIS_PORT,
+  password: process.env.REDIS_PASSWORD,
+});
 
 // ms * sec * min * hours * days
 const SESSION_EXPIRY = 1000 * 60 * 60 * 24 * 7; // 1 week
@@ -24,7 +31,9 @@ const PORT = process.env.PORT || 3000;
 // CREATES SESSION
 app.use(
   session({
-    store: new PgStore({ conString: process.env.DATABASE }),
+    store: new RedisStore({
+      client: redisClient,
+    }),
     secret: process.env.COOKIE_SECRET,
     resave: false,
     saveUninitialized: true,
